@@ -1,8 +1,5 @@
 *DS_STORE
 history.yml
-<<<<<<< HEAD
-=======
 lib/nightwatch
 lib/nightwatch/status.txt
 lib/nightwatch/urls.txt
->>>>>>> Added functionality, added gets for sinatra. Comments for debugging only, will need to be removed before submission.
