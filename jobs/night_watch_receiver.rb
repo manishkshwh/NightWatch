@@ -2,7 +2,7 @@ if !File.directory? 'lib'
 	Dir.mkdir('lib')
 end
 
-if !File.directory? 'lib/nightwatch'
+if !File.directory? 'lib/nightwatch' 
 	Dir.mkdir('lib/nightwatch')
 end
 if !File.exists? 'lib/nightwatch/state.txt'
@@ -44,7 +44,7 @@ get '/alterState/:state' do
 	
 	newState = params[:state].split(" ").first
 	
-	stateFile = File.open("lib/nightwatch/state.txt", "w")
+	stateFile = File.open("lib/nightwatch/state.txt", "w") 
 		stateFile.syswrite(newState)
 	stateFile.close
 
