@@ -1,0 +1,6 @@
+<% idnum = 0 %>
+<% test.each do |text| %>
+	<img class="<%= start %>" id="<%= idnum %>" src="<%= text %>" style="width:100%;"/>
+	<% idnum = idnum + 1 %>
+	<br>
+<% end %>

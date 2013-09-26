@@ -21,13 +21,11 @@ class NightWatch
 	end
 
 	def nextMove
-		@state = IO.readlines('lib/nightwatch/state.txt').first
-		@urls = IO.readlines('lib/nightwatch/urls.txt')
-
+		getInfo
 		if @state == "rotate" or @state == "shuffle" or @state == "freeze"
 			eval("#{@state}()") 
 		else
-			puts "Invalid state found. Rotating."
+			#puts "Invalid state found. Rotating."
 			rotate
 		end
 	end
@@ -40,8 +38,13 @@ class NightWatch
 		a.close
 	end
 
+	def getInfo
+		@state = IO.readlines('lib/nightwatch/state.txt').first
+		@urls = IO.readlines('lib/nightwatch/urls.txt')
+	end
+
 	def delimitedUrls
-		return @urls.inspect()
+		return @urls
 	end
 
 end
@@ -49,10 +52,10 @@ end
 class NightWatchEngage
 	theList = NightWatch.new
 
-	SCHEDULER.every '30s', :first_in => 0 do |job|
+	SCHEDULER.every '15s', :first_in => 0 do |job|
 	  theList.nextMove
-	  send_event('nightwatch', urls: theList.delimitedUrls)
-	  puts theList.delimitedUrls
+	  send_event('nightwatch', length: theList.delimitedUrls.length)
+	  puts theList.delimitedUrls.first
 	end
 
 end

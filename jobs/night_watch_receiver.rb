@@ -14,18 +14,19 @@ if !File.exists? 'lib/nightwatch/urls.txt'
 	a.close
 end
 
-get '/addUrl/:url' do
-	puts "test: #{params[:url]}"
+get '/nightwatch/addUrl' do
+	puts params[:url] 
 	urlFile = File.open("lib/nightwatch/urls.txt", "a")
 		urlFile.syswrite("#{params[:url]}\r\n")
 	urlFile.close
 end
 
-get '/removeUrl/:url' do
-	puts "test remove: #{params[:url]}"
+get '/nightwatch/removeUrl' do
 	# read the list into an array
 	# remove the url from the arry, if it exists
 	# write the new array to the list file
+	puts params[:url]	
+	
 	urls = IO.readlines('lib/nightwatch/urls.txt')
 	urls.delete("#{params[:url]}\r\n")
 	writeString = ""
@@ -35,6 +36,11 @@ get '/removeUrl/:url' do
 		urlFile.syswrite(writeString)
 	urlFile.close
 
+end
+
+get '/nightwatch/widgetBody' do
+	urls = IO.readlines('lib/nightwatch/urls.txt')
+	erb :nightwatchbody, :locals => { :test => urls, :start => params[:start] }
 end
 
 get '/alterState/:state' do
